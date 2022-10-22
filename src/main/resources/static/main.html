@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teachers</title>
+  <script>
+    function getAllTeachers(){
+      let cavabGelende = function (){
+        if(this.readyState ==4 && this.status == 200){
+            let teacherContainer = document.getElementById("teacher");
+            let teachers =JSON.parse(this.responseText);
+
+            for(let i=0;i<teachers.length;i++){
+                let teacher = teachers[i];
+                teacherContainer.innerHTML += teacher.name;
+            }
+        }
+      }
+      let xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = cavabGelende();
+      xhttp.open("GET","http://localhost:8080/teacgers",true);
+      xhttp.send();
+    }
+  </script>
+</head>
+<body>
+<button id="btnTeachers">Get Teachers</button>
+<div id="teacher">
+</div>
+</body>
+
+</html>
